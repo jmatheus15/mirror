@@ -1,0 +1,716 @@
+
+/* ============================================================
+   DUELO DO TEMPO
+   Sistema visual
+============================================================ */
+
+:root {
+    --bg: #090A0F;
+    --panel: rgba(15, 17, 24, 0.60);
+    --line: rgba(30, 41, 59, 0.80);
+
+    --text: #F8FAFC;
+    --muted: #94A3B8;
+    --dim: #64748B;
+
+    --blue: #00A3FF;
+}
+
+
+/* ============================================================
+   BASE
+============================================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background:
+        radial-gradient(
+            circle at 50% -20%,
+            rgba(0, 163, 255, 0.035),
+            transparent 35%
+        ),
+        var(--bg);
+
+    color: var(--text);
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+
+/* ============================================================
+   SCROLLBAR
+============================================================ */
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: #090A0F;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1E293B;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #334155;
+}
+
+
+/* ============================================================
+   HUD CARD
+============================================================ */
+
+.hud-card {
+    background: rgba(15, 17, 24, 0.60);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border: 1px solid rgba(30, 41, 59, 0.80);
+
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.18);
+
+    transition:
+        border-color 180ms ease,
+        background 180ms ease;
+}
+
+.hud-card:hover {
+    border-color: rgba(51, 65, 85, 0.90);
+}
+
+
+/* ============================================================
+   TYPOGRAPHY
+============================================================ */
+
+.section-label {
+    color: #CBD5E1;
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: 0.18em;
+}
+
+.metric-label {
+    color: #64748B;
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 0.16em;
+}
+
+.metric-value {
+    margin-top: 5px;
+
+    color: #E2E8F0;
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 18px;
+    font-weight: 500;
+}
+
+
+/* ============================================================
+   SYSTEM PULSE
+============================================================ */
+
+.system-pulse {
+    animation: systemPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes systemPulse {
+
+    0%,
+    100% {
+        opacity: 0.35;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+
+/* ============================================================
+   INPUT
+============================================================ */
+
+.terminal-input {
+    background: rgba(2, 6, 23, 0.65);
+
+    border: 1px solid rgba(30, 41, 59, 0.9);
+
+    color: #F8FAFC;
+
+    outline: none;
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 13px;
+
+    transition:
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        background 180ms ease;
+}
+
+.terminal-input::placeholder {
+    color: #475569;
+}
+
+.terminal-input:hover {
+    border-color: #334155;
+}
+
+.terminal-input:focus {
+    border-color: rgba(0, 163, 255, 0.65);
+
+    background: rgba(2, 6, 23, 0.85);
+
+    box-shadow:
+        0 0 0 1px rgba(0, 163, 255, 0.08);
+}
+
+
+/* ============================================================
+   ESFORÇO
+============================================================ */
+
+.effort-button {
+    min-height: 58px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    gap: 4px;
+
+    padding: 10px 13px;
+
+    color: #64748B;
+
+    background: rgba(15, 23, 42, 0.35);
+
+    border: 1px solid rgba(30, 41, 59, 0.9);
+
+    text-align: left;
+
+    transition:
+        color 150ms ease,
+        background 150ms ease,
+        border-color 150ms ease,
+        transform 150ms ease;
+}
+
+.effort-button span {
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 10px;
+
+    letter-spacing: 0.15em;
+}
+
+.effort-button small {
+    font-size: 10px;
+
+    color: #475569;
+}
+
+.effort-button:hover {
+    color: #CBD5E1;
+
+    border-color: #334155;
+
+    background: rgba(30, 41, 59, 0.45);
+}
+
+.effort-button:active {
+    transform: scale(0.985);
+}
+
+
+/* Estado selecionado */
+
+.effort-button.selected {
+    color: #F8FAFC;
+
+    border-color: rgba(0, 163, 255, 0.65);
+
+    background: rgba(0, 163, 255, 0.08);
+
+    box-shadow:
+        inset 2px 0 0 #00A3FF;
+}
+
+.effort-button.selected small {
+    color: #7DD3FC;
+}
+
+
+/* ============================================================
+   SYSTEM BUTTON
+============================================================ */
+
+.system-button {
+    min-height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 16px;
+
+    color: #E2E8F0;
+
+    background: rgba(0, 163, 255, 0.07);
+
+    border: 1px solid rgba(0, 163, 255, 0.32);
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 10px;
+
+    letter-spacing: 0.13em;
+
+    transition:
+        background 150ms ease,
+        border-color 150ms ease,
+        color 150ms ease;
+}
+
+.system-button:hover {
+    color: #FFFFFF;
+
+    background: rgba(0, 163, 255, 0.12);
+
+    border-color: rgba(0, 163, 255, 0.65);
+}
+
+.system-button:active {
+    background: rgba(0, 163, 255, 0.16);
+}
+
+
+/* ============================================================
+   FILTROS
+============================================================ */
+
+.filter-button {
+    position: relative;
+
+    padding: 0 0 12px;
+
+    color: #475569;
+
+    background: transparent;
+
+    border: 0;
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 9px;
+
+    letter-spacing: 0.13em;
+
+    transition: color 150ms ease;
+}
+
+.filter-button span {
+    margin-left: 4px;
+
+    color: #334155;
+}
+
+.filter-button:hover {
+    color: #94A3B8;
+}
+
+.filter-button.active {
+    color: #E2E8F0;
+}
+
+.filter-button.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: -1px;
+
+    height: 1px;
+
+    background: #00A3FF;
+}
+
+
+/* ============================================================
+   TASK
+============================================================ */
+
+.task-item {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns: 24px minmax(0, 1fr) auto;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 12px;
+
+    border: 1px solid transparent;
+
+    transition:
+        background 150ms ease,
+        border-color 150ms ease;
+}
+
+.task-item:hover {
+    background: rgba(15, 23, 42, 0.48);
+
+    border-color: rgba(30, 41, 59, 0.8);
+}
+
+
+/* Checkbox */
+
+.task-checkbox {
+    width: 17px;
+    height: 17px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+
+    border: 1px solid #475569;
+
+    color: transparent;
+
+    transition:
+        background 150ms ease,
+        border-color 150ms ease,
+        color 150ms ease;
+}
+
+.task-checkbox:hover {
+    border-color: #00A3FF;
+}
+
+.task-checkbox.completed {
+    background: #00A3FF;
+
+    border-color: #00A3FF;
+
+    color: #020617;
+}
+
+
+/* Task title */
+
+.task-title {
+    color: #E2E8F0;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    transition:
+        color 150ms ease,
+        opacity 150ms ease;
+}
+
+.task-item.completed .task-title {
+    color: #64748B;
+
+    text-decoration: line-through;
+
+    text-decoration-color: #475569;
+}
+
+
+/* Task metadata */
+
+.task-meta {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-top: 4px;
+
+    color: #475569;
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 0.08em;
+}
+
+.task-meta .separator {
+    color: #1E293B;
+}
+
+
+/* Effort tag */
+
+.task-effort {
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 0.1em;
+}
+
+.task-effort.light {
+    color: #6EE7B7;
+}
+
+.task-effort.medium {
+    color: #FCD34D;
+}
+
+.task-effort.heavy {
+    color: #FB7185;
+}
+
+
+/* Delete */
+
+.delete-task {
+    width: 28px;
+    height: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #334155;
+
+    background: transparent;
+
+    border: 0;
+
+    opacity: 0;
+
+    transition:
+        color 150ms ease,
+        opacity 150ms ease;
+}
+
+.task-item:hover .delete-task {
+    opacity: 1;
+}
+
+.delete-task:hover {
+    color: #FB7185;
+}
+
+
+/* ============================================================
+   WEEK TRACKER
+============================================================ */
+
+.week-day {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 7px;
+}
+
+.week-day-label {
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 8px;
+
+    color: #475569;
+}
+
+.week-day-block {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+
+    border: 1px solid #1E293B;
+
+    background: rgba(15, 23, 42, 0.35);
+
+    transition:
+        border-color 150ms ease,
+        background 150ms ease;
+}
+
+.week-day.success .week-day-block {
+    background: rgba(0, 163, 255, 0.14);
+
+    border-color: rgba(0, 163, 255, 0.55);
+}
+
+.week-day.today .week-day-block {
+    box-shadow:
+        inset 0 0 0 1px rgba(248, 250, 252, 0.25);
+}
+
+.week-day.failed .week-day-block {
+    background: rgba(71, 85, 105, 0.25);
+
+    border-color: #334155;
+}
+
+
+/* ============================================================
+   DIAGNÓSTICO
+============================================================ */
+
+.diagnostic-line {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+    color: #64748B;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+.diagnostic-code {
+    color: #334155;
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 0.13em;
+}
+
+
+/* ============================================================
+   ACHIEVEMENTS
+============================================================ */
+
+.achievement {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 10px;
+
+    border: 1px solid rgba(30, 41, 59, 0.65);
+
+    background: rgba(2, 6, 23, 0.25);
+
+    transition:
+        border-color 150ms ease,
+        background 150ms ease;
+}
+
+.achievement.unlocked {
+    border-color: rgba(0, 163, 255, 0.25);
+
+    background: rgba(0, 163, 255, 0.035);
+}
+
+.achievement-icon {
+    width: 27px;
+    height: 27px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #334155;
+
+    color: #475569;
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 10px;
+}
+
+.achievement.unlocked .achievement-icon {
+    border-color: rgba(0, 163, 255, 0.5);
+
+    color: #00A3FF;
+}
+
+.achievement-name {
+    color: #64748B;
+
+    font-size: 10px;
+}
+
+.achievement.unlocked .achievement-name {
+    color: #CBD5E1;
+}
+
+
+/* ============================================================
+   RESPONSIVIDADE
+============================================================ */
+
+@media (max-width: 1023px) {
+
+    .hud-card {
+        border-radius: 2px;
+    }
+
+}
+
+@media (max-width: 640px) {
+
+    .task-item {
+        grid-template-columns: 24px minmax(0, 1fr);
+    }
+
+    .delete-task {
+        display: none;
+    }
+
+    .task-meta {
+        flex-wrap: wrap;
+    }
+
+    .effort-button {
+        min-height: 52px;
+    }
+
+}

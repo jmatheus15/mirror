@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MIRROR</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    },
+                    colors: {
+                        system: {
+                            bg: '#090A0F',
+                            panel: '#0F1118',
+                            line: '#1E293B',
+                            blue: '#00A3FF',
+                            text: '#F8FAFC',
+                            muted: '#94A3B8'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23090A0F'/%3E%3Crect x='2' y='2' width='60' height='60' rx='10' fill='none' stroke='%231E293B' stroke-width='1.5'/%3E%3Cpolyline points='18,44 26,20 32,32' fill='none' stroke='%2300A3FF' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='32,32 38,20 46,44' fill='none' stroke='%2300A3FF' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+
+<body class="bg-[#090A0F] text-[#F8FAFC] font-sans min-h-screen">
+
+    <main class="min-h-screen">
+
+        <!-- HEADER -->
+
+        <header class="border-b border-slate-800/80">
+
+            <div class="max-w-[1600px] mx-auto px-5 lg:px-8">
+
+                <div class="h-16 flex items-center justify-between gap-6">
+
+                    <!-- Sistema -->
+                    <div class="flex items-center gap-4 min-w-0">
+
+                        <div class="w-2 h-2 rounded-full bg-[#00A3FF] system-pulse"></div>
+
+                        <div class="font-mono text-xs tracking-widest whitespace-nowrap">
+                            <span class="text-[#F8FAFC]"></span>MIRROR
+                            
+                        </div>
+
+                    </div>
+
+                   
+
+                </div>
+
+            </div>
+
+
+
+        </header>
+
+
+        <!-- DASHBOARD -->
+
+        <section class="max-w-[1600px] mx-auto px-5 lg:px-8 py-6">
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+
+
+                <!-- COLUNA ESQUERDA -->
+
+                <aside class="lg:col-span-3 space-y-5">
+
+                    <!-- Performance -->
+                    <section class="hud-card p-5">
+
+                        <div class="flex items-center justify-between mb-6">
+
+                            <div>
+                                <p class="section-label">
+                                    PERFORMANCE
+                                </p>
+
+                                <p class="text-xs text-slate-500 mt-1">
+                                    Estado operacional
+                                </p>
+                            </div>
+
+                            <span class="font-mono text-[10px] text-slate-600">
+                                01
+                            </span>
+
+                        </div>
+
+
+                        <!-- Barra única -->
+                        <div class="mb-7">
+
+                            <div class="flex justify-between items-end mb-3">
+
+                                <div>
+                                    <span class="font-mono text-[10px] tracking-widest text-slate-500">
+                                        DESEMPENHO
+                                    </span>
+
+                                    <div class="font-mono text-3xl mt-1">
+                                        <span id="focusPercentage">0</span>
+                                        <span class="text-sm text-slate-600">%</span>
+                                    </div>
+                                </div>
+
+                                <div class="text-right">
+
+                                    <span class="font-mono text-[10px] tracking-widest text-slate-500">
+                                        PROCRASTINAÇÃO
+                                    </span>
+
+                                    <div class="font-mono text-xl mt-1 text-slate-300">
+                                        <span id="resistancePercentage">100</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="h-2 bg-slate-950 border border-slate-800 overflow-hidden">
+
+                                <div
+                                    id="focusBar"
+                                    class="h-full bg-[#00A3FF] transition-all duration-500"
+                                    style="width: 0%"
+                                ></div>
+
+                            </div>
+
+                            <div class="flex justify-between mt-2">
+
+                                <span class="font-mono text-[9px] text-slate-600">
+                                    0
+                                </span>
+
+                                <span class="font-mono text-[9px] text-slate-600">
+                                    100
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Grid técnica -->
+                        <div class="grid grid-cols-2 border-t border-slate-800/80">
+
+                            <div class="pt-4 pb-3 border-r border-slate-800/80 pr-4">
+
+                                <p class="metric-label">
+                                    TAREFAS
+                                </p>
+
+                                <p
+                                    id="totalTasks"
+                                    class="metric-value"
+                                >
+                                    00
+                                </p>
+
+                            </div>
+
+                            <div class="pt-4 pb-3 pl-4">
+
+                                <p class="metric-label">
+                                    CONCLUÍDAS
+                                </p>
+
+                                <p
+                                    id="completedTasks"
+                                    class="metric-value"
+                                >
+                                    00
+                                </p>
+
+                            </div>
+
+                            <div class="pt-3 border-t border-slate-800/80 pr-4">
+
+                                <p class="metric-label">
+                                    IMPACTO
+                                </p>
+
+                                <p
+                                    id="impactValue"
+                                    class="metric-value"
+                                >
+                                    000
+                                </p>
+
+                            </div>
+
+                            <div class="pt-3 border-t border-slate-800/80 pl-4">
+
+                                <p class="metric-label">
+                                    STREAK
+                                </p>
+
+                                <p
+                                    id="streakValue"
+                                    class="metric-value"
+                                >
+                                    0D
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- XP -->
+                    <section class="hud-card p-5">
+
+                        <div class="flex justify-between items-start mb-5">
+
+                            <div>
+
+                                <p class="section-label">
+                                    PROGRESSÃO
+                                </p>
+
+                                <p class="text-xs text-slate-500 mt-1">
+                                    Calibragem de experiência
+                                </p>
+
+                            </div>
+
+                            <span class="font-mono text-[10px] text-slate-600">
+                                XP
+                            </span>
+
+                        </div>
+
+
+                        <div class="flex items-end justify-between mb-2">
+
+                            <div>
+
+                                <span class="font-mono text-[10px] tracking-widest text-slate-500">
+                                    NÍVEL
+                                </span>
+
+                                <div
+                                    id="levelValue"
+                                    class="font-mono text-3xl mt-1"
+                                >
+                                    01
+                                </div>
+
+                            </div>
+
+                            <div class="font-mono text-xs text-slate-500">
+                                <span id="xpCurrent">0</span>
+                                /
+                                <span id="xpNext">450</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="h-1 bg-slate-950 border border-slate-800">
+
+                            <div
+                                id="xpBar"
+                                class="h-full bg-[#00A3FF] transition-all duration-500"
+                                style="width: 0%"
+                            ></div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- Diagnóstico -->
+                    <section class="hud-card p-5">
+
+                        <div class="flex items-center justify-between mb-5">
+
+                            <p class="section-label">
+                                DIAGNÓSTICO
+                            </p>
+
+                            <span class="font-mono text-[9px] text-[#00A3FF]">
+                                AUTO
+                            </span>
+
+                        </div>
+
+                        <div class="space-y-4">
+
+                            <div class="diagnostic-line">
+
+                                <span class="diagnostic-code">
+                                    SYS.01
+                                </span>
+
+                                <span id="diagnosticText">
+                                    Aguardando primeira tarefas.
+                                </span>
+
+                            </div>
+
+                            <div class="diagnostic-line">
+
+                                <span class="diagnostic-code">
+                                    SYS.02
+                                </span>
+
+                                <span id="diagnosticSubtext">
+                                    Defina uma tarefa para iniciar.
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </aside>
+
+
+
+                <!-- =================================================
+                     COLUNA CENTRAL
+                ================================================== -->
+
+                <section class="lg:col-span-6 space-y-5">
+
+                    <!-- Terminal -->
+                    <section class="hud-card">
+
+                        <div class="p-5 border-b border-slate-800/80">
+
+                            <div class="flex items-center justify-between">
+
+                                <div>
+
+                                    <p class="section-label">
+                                        TERMINAL DE TAREFAS
+                                    </p>
+
+                                    <p class="text-xs text-slate-500 mt-1">
+                                        Transforme intenção em execução.
+                                    </p>
+
+                                </div>
+
+                                <span class="font-mono text-[10px] text-slate-600">
+                                    INPUT
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="p-5">
+
+                            <!-- Input -->
+                            <div class="relative">
+
+                                <span class="absolute left-4 top-1/2 -translate-y-1/2 font-mono text-sm text-[#00A3FF]">
+                                    &gt;
+                                </span>
+
+                                <input
+                                    id="taskInput"
+                                    type="text"
+                                    maxlength="120"
+                                    autocomplete="off"
+                                    placeholder="Digite a próxima tarefas..."
+                                    class="terminal-input w-full pl-9 pr-4 py-4"
+                                >
+
+                            </div>
+
+
+                            <!-- Dificuldade -->
+                            <div class="mt-5">
+
+                                <div class="flex items-center justify-between mb-3">
+
+                                    <span class="section-label">
+                                        DIFICULDADE
+                                    </span>
+
+                                    <span
+                                        id="selectedEffortLabel"
+                                        class="font-mono text-[10px] text-[#00A3FF] tracking-widest"
+                                    >
+                                        NÃO DEFINIDO
+                                    </span>
+
+                                </div>
+
+
+                                <div class="grid grid-cols-3 gap-2">
+
+                                    <button
+                                        type="button"
+                                        class="effort-button"
+                                        data-effort="light"
+                                    >
+                                        <span>LEVE</span>
+                                        <small>10 XP</small>
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="effort-button"
+                                        data-effort="medium"
+                                    >
+                                        <span>MÉDIA</span>
+                                        <small>25 XP</small>
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="effort-button"
+                                        data-effort="heavy"
+                                    >
+                                        <span>PESADA</span>
+                                        <small>50 XP</small>
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Botão -->
+                            <button
+                                id="addTaskButton"
+                                type="button"
+                                class="system-button w-full mt-5"
+                            >
+                                <span>INICIAR TAREFA</span>
+
+                                <span class="font-mono text-[9px] opacity-50">
+                                    ENTER
+                                </span>
+                            </button>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- Lista -->
+                    <section class="hud-card">
+
+                        <div class="p-5 border-b border-slate-800/80">
+
+                            <div class="flex items-center justify-between">
+
+                                <div>
+
+                                    <p class="section-label">
+                                        TAREFAS ATIVAS
+                                    </p>
+
+                                    <p class="text-xs text-slate-500 mt-1">
+                                        Execução do ciclo actual.
+                                    </p>
+
+                                </div>
+
+                                <div class="font-mono text-[10px] text-slate-600">
+
+                                    <span id="activeCount">
+                                        00
+                                    </span>
+
+                                    ATIVOS
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Filtros -->
+                        <div class="px-5 pt-4">
+
+                            <div class="flex items-center gap-5 border-b border-slate-800/80">
+
+                                <button
+                                    class="filter-button active"
+                                    data-filter="all"
+                                    type="button"
+                                >
+                                    TODAS
+                                    <span id="allCount">0</span>
+                                </button>
+
+                                <button
+                                    class="filter-button"
+                                    data-filter="pending"
+                                    type="button"
+                                >
+                                    PENDENTES
+                                    <span id="pendingCount">0</span>
+                                </button>
+
+                                <button
+                                    class="filter-button"
+                                    data-filter="completed"
+                                    type="button"
+                                >
+                                    CONCLUÍDAS
+                                    <span id="completedFilterCount">0</span>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Tasks -->
+                        <div
+                            id="taskList"
+                            class="p-3"
+                        ></div>
+
+
+                        <!-- Empty -->
+                        <div
+                            id="emptyState"
+                            class="hidden px-8 py-16 text-center"
+                        >
+
+
+                            <p class="text-sm text-slate-400">
+                                Nenhuma tarefas registada.
+                            </p>
+
+                            <p class="text-xs text-slate-600 mt-1">
+                                Defina uma tarefa para iniciar o próximo ciclo.
+                            </p>
+
+                        </div>
+
+                    </section>
+
+                </section>
+
+
+
+                <!-- =================================================
+                     COLUNA DIREITA
+                ================================================== -->
+
+                <aside class="lg:col-span-3 space-y-5">
+
+                    <!-- Semana -->
+                    <section class="hud-card p-5">
+
+                        <div class="flex items-center justify-between mb-6">
+
+                            <div>
+
+                                <p class="section-label">
+                                    CICLO SEMANAL
+                                </p>
+
+                                <p class="text-xs text-slate-500 mt-1">
+                                    Consistência operacional
+                                </p>
+
+                            </div>
+
+                            <span class="font-mono text-[10px] text-slate-600">
+                                07D
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            id="weekTracker"
+                            class="grid grid-cols-7 gap-1"
+                        ></div>
+
+
+                        <div class="mt-5 pt-4 border-t border-slate-800/80">
+
+                            <div class="flex justify-between">
+
+                                <span class="metric-label">
+                                    DIAS CONCLUÍDOS
+                                </span>
+
+                                <span
+                                    id="weekCompleted"
+                                    class="font-mono text-xs text-slate-300"
+                                >
+                                    0 / 7
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- Status -->
+                    <section class="hud-card p-5">
+
+                        <div class="flex items-center justify-between mb-5">
+
+                            <div>
+
+                                <p class="section-label">
+                                    STATUS DO CICLO
+                                </p>
+
+                                <p class="text-xs text-slate-500 mt-1">
+                                    Leitura actual do sistema.
+                                </p>
+
+                            </div>
+
+                            <span
+                                id="cycleIndicator"
+                                class="w-2 h-2 bg-slate-700"
+                            ></span>
+
+                        </div>
+
+
+                        <div>
+
+                            <p
+                                id="cycleStatus"
+                                class="font-mono text-sm tracking-widest text-slate-300"
+                            >
+                                AGUARDANDO
+                            </p>
+
+                            <p
+                                id="cycleDescription"
+                                class="text-xs leading-5 text-slate-500 mt-2"
+                            >
+                                Adicione uma tarefas para iniciar o ciclo.
+                            </p>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- Conquistas -->
+                    <section class="hud-card p-5">
+
+                        <div class="flex items-center justify-between mb-5">
+
+                            <div>
+
+                                <p class="section-label">
+                                    REGISTRO
+                                </p>
+
+                                <p class="text-xs text-slate-500 mt-1">
+                                    Marcos de consistência.
+                                </p>
+
+                            </div>
+
+                            <span class="font-mono text-[10px] text-slate-600">
+                                ACH
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            id="achievementList"
+                            class="space-y-2"
+                        ></div>
+
+                    </section>
+
+
+                    <!-- Estatísticas -->
+                    <section class="hud-card p-5">
+
+                        <div class="flex items-center justify-between mb-5">
+
+                            <p class="section-label">
+                                TELEMETRIA
+                            </p>
+
+                            <span class="font-mono text-[9px] text-slate-600">
+                                LIVE
+                            </span>
+
+                        </div>
+
+
+                        <div class="space-y-4">
+
+                            <div class="flex justify-between items-center">
+
+                                <span class="text-xs text-slate-500">
+                                    Acções rápidas
+                                </span>
+
+                                <span
+                                    id="quickActions"
+                                    class="font-mono text-xs"
+                                >
+                                    0
+                                </span>
+
+                            </div>
+
+                            <div class="flex justify-between items-center">
+
+                                <span class="text-xs text-slate-500">
+                                    Metas alcançadas
+                                </span>
+
+                                <span
+                                    id="goalsReached"
+                                    class="font-mono text-xs"
+                                >
+                                    0
+                                </span>
+
+                            </div>
+
+                            <div class="flex justify-between items-center">
+
+                                <span class="text-xs text-slate-500">
+                                    TAREFAS abandonadas
+                                </span>
+
+                                <span
+                                    id="abandonedTasks"
+                                    class="font-mono text-xs"
+                                >
+                                    0
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </aside>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+
+    <script src="scriptS.js"></script>
+
+</body>
+</html>
+
